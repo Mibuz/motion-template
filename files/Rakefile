@@ -1,0 +1,49 @@
+# -*- coding: utf-8 -*-
+$:.unshift("/Library/RubyMotion/lib")
+require 'motion/project/template/ios'
+require 'rubygems'
+require 'motion-cocoapods'
+require 'sugarcube-all'
+
+begin
+  require 'bundler'
+  Bundler.require
+rescue LoadError
+end
+
+Motion::Project::App.setup do |app|
+  # Use `rake config' to see complete project settings.
+  app.name = 'My App'
+
+  # app.interface_orientations = [:portrait]
+
+  # app.frameworks += ['Social', 'Accounts', 'QuartzCore', 'Foundation']
+
+  app.pods do
+    pod 'SDWebImage',            git: 'https://github.com/rs/SDWebImage.git'
+    pod 'Reachability',          git: 'https://github.com/tonymillion/Reachability.git'
+    pod 'NZAlertView',           git: 'https://github.com/NZN/NZAlertView.git'
+    pod 'SIAlertView',           git: 'https://github.com/Sumi-Interactive/SIAlertView.git'
+    pod 'SVProgressHUD',         git: 'https://github.com/samvermette/SVProgressHUD.git'
+    pod 'TUSafariActivity',      git: 'https://github.com/davbeck/TUSafariActivity.git'
+    pod 'SSCWhatsAppActivity',   git: 'https://github.com/sascha/SSCWhatsAppActivity.git'
+    pod 'SAMGradientView',       git: 'https://github.com/soffes/SAMGradientView.git'
+    pod 'NVSlideMenuController', git: 'https://github.com/nverinaud/NVSlideMenuController.git'
+  end
+
+  app.version = '0.0.1'
+  app.short_version = app.version
+  app.sdk_version = '7.1'
+  app.deployment_target = '7.0'
+  app.device_family = [:iphone]
+  app.identifier = 'br.com.company.App'
+
+
+  app.testflight do
+    app.codesign_certificate = ENV['CODESIGN_CERTIFICATE']
+    app.provisioning_profile = ENV['PROVISIONING_PROFILE']
+    app.testflight.api_token = ENV['TEST_FLIGHT_TOKEN']
+    app.testflight.team_token = 'team-toke'
+    app.testflight.app_token = 'my-app-token'
+  end
+end
